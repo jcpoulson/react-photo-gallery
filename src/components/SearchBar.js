@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
 
 class SearchBar extends Component {
 
