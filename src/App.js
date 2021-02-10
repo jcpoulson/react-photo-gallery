@@ -17,13 +17,14 @@ class App extends Component {
  constructor() {
    super();
    this.state = {
+    loading: false,
     value: "oceans",
     photos: []
   }
  }
 
   componentDidMount() {
-    this.changeData();
+    this.changeData("Oceans");
   }
 
   // This is the main data fetching function that uses axios to fetch data and update application state
@@ -36,19 +37,39 @@ class App extends Component {
     })
   }
 
+  handleLoading = () => {
+    this.setState({
+      ...this.state,
+      loading: true
+    })
+    setTimeout(() => {
+      this.setState({
+        ...this.state,
+        loading: false
+      })
+    }, 2000)
+  }
+
   render() {
     return (
       <div className="App">
       <BrowserRouter>
-        <Route path="/" render={(props) => <SearchBar history={props.history} changeData={this.changeData} />} />
-        <Route path="/" render={(props) => <NavBar history={props.history} changeData={this.changeData} />} />
+        {/* The search bar was put within a route in order to pass down the history object */}
+        <Route path="/" render={(props) => <SearchBar history={props.history} changeData={this.changeData} handleLoading={this.handleLoading}/>} />
+        
+        <NavBar changeData={this.changeData} />
+
         <Switch>
-          <Route exact path="/" render={() => <PhotoContainer photos={this.state.photos} /> } />
-          <Route path="/oceans" render={() => <PhotoContainer photos={this.state.photos} />} />
-          <Route path="/mountains" render={() => <PhotoContainer photos={this.state.photos} />} />
-          <Route path="/trees" render={() => <PhotoContainer photos={this.state.photos} />} />
-          <Route path="/:searchValue" render={() => <PhotoContainer photos={this.state.photos} />} />
+          <Route exact path="/" render={() => <PhotoContainer loading={this.state.loading} photos={this.state.photos} /> } />
+          <Route path="/oceans" render={() => <PhotoContainer loading={this.state.loading} photos={this.state.photos} />} />
+          <Route path="/mountains" render={() => <PhotoContainer loading={this.state.loading} photos={this.state.photos} />} />
+          <Route path="/trees" render={() => <PhotoContainer loading={this.state.loading} photos={this.state.photos} />} />
+          <Route exact path="/:searchValue" render={() => <PhotoContainer loading={this.state.loading} photos={this.state.photos} />} />
+          
+          {/* 404 error routes*/}
+          <Route path="/:anything/:anything" component={NotFound} />
           <Route component={NotFound} />
+
         </Switch>
       </BrowserRouter>
       </div>

@@ -1,9 +1,9 @@
 const NoResults = () => {
     return (
-        <li className="no-results">
+        <div className="not-found">
             <h3>No Results Found</h3>
             <p>Sorry, there were no matches for what you searched</p>
-        </li>
+        </div>
     )
 }
 

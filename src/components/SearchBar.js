@@ -17,8 +17,11 @@ class SearchBar extends Component {
     // this calls an App callback which makes the request for data with the search value in state
     handleSubmit = e => {
         e.preventDefault();
-        this.props.history.push(`/${this.state.searchValue}`);
-        this.props.changeData(this.state.searchValue)
+        this.props.handleLoading();
+        setTimeout(() => {
+            this.props.history.push(`${this.state.searchValue}`);
+            this.props.changeData(this.state.searchValue)
+        }, 1500);
     }
 
     render() {
