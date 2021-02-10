@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 class SearchBar extends Component {
 
@@ -18,6 +18,7 @@ class SearchBar extends Component {
     // this calls an App callback which makes the request for data with the search value in state
     handleSubmit = e => {
         e.preventDefault();
+        this.props.history.push(`/${this.state.searchValue}`);
         this.props.changeData(this.state.searchValue)
     }
 

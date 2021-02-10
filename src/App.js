@@ -40,8 +40,8 @@ class App extends Component {
     return (
       <div className="App">
       <BrowserRouter>
-        <SearchBar changeData={this.changeData} />
-        <NavBar changeData={this.changeData}/>
+        <Route path="/" render={(props) => <SearchBar history={props.history} changeData={this.changeData} />} />
+        <Route path="/" render={(props) => <NavBar history={props.history} changeData={this.changeData} />} />
         <Switch>
           <Route exact path="/" render={() => <PhotoContainer photos={this.state.photos} /> } />
           <Route path="/oceans" render={() => <PhotoContainer photos={this.state.photos} />} />
