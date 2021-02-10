@@ -1,27 +1,19 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-class NavBar extends Component {
-    constructor() {
-        super()
-    }
+const NavBar = (props, {match}) => {
 
-    handleLinkChange = e => {
-        let link = e.target.value;
-        this.props.changeData(link.value)
-    }
-
-    render() {
-        return (
-            <nav className="main-nav">
-                <ul>
-                    <li onClick={ this.handleLinkChange }><NavLink to="/ocean">Ocean</NavLink></li>
-                    <li onClick={ this.handleLinkChange }><NavLink to="/mountain">Mountains</NavLink></li>
-                    <li><NavLink to="/trees">Trees</NavLink></li>
-                </ul>
-            </nav>
-        )
-    }
+    return (
+        <nav className="main-nav">
+            <ul>
+                {/* Calling the app callback and passing the given link values for the changeData function */}
+                <li onClick={ () => props.changeData("oceans") }><NavLink to="/oceans">Ocean</NavLink></li>
+                <li onClick={ () => props.changeData("Mountain") }><NavLink to="/mountains">Mountains</NavLink></li>
+                <li onClick={ () => props.changeData("trees") }><NavLink to="/trees">Trees</NavLink></li>
+            </ul>
+        </nav>
+    )
+    
 }
     
 

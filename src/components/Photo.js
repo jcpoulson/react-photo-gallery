@@ -2,6 +2,7 @@ import React from 'react';
 
 const Photo = (props) => {
 
+    // The photo data is passed down through props and this component returns a dynamically generated photo
     let photo = props.data;
 
     return (
